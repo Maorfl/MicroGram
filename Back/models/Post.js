@@ -35,7 +35,7 @@ const commentSchema = new mongoose.Schema({
 })
 
 const postSchema = new mongoose.Schema({
-    txt: { type: String, required: true },
+    txt: { type: String},
     imgUrl: { type: String, required: true },
     createdAt: { type: Number, required: true },
     by: { type: minUserSchema, required: true },

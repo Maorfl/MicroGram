@@ -25,9 +25,11 @@ async function getById(postId) {
 
 async function add(post) {
     try {
-        post.txt = validationService.validateText(post.txt);
-        const { error } = validationService.validatePost(post)
-        if (error) return Promise.reject("Invalid data provided");
+        if (post.txt){
+            post.txt = validationService.validateText(post.txt);
+            const { error } = validationService.validatePost(post)
+            if (error) return Promise.reject("Invalid data provided");
+        }
         const newPost = new Post({...post});
 
         return await newPost.save();

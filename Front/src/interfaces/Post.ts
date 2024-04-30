@@ -3,7 +3,7 @@ import MinUser from "./MinUser";
 
 export default interface Post {
     _id: string;
-    txt: string;
+    txt?: string;
     imgUrl: string;
     createdAt: number;
     by: MinUser;

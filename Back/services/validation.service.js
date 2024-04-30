@@ -72,7 +72,7 @@ const commentSchema = joi.object({
 
 const validatePost = (postData) => {
     const postSchema = joi.object({
-        txt: joi.string().required(),
+        txt: joi.string(),
         imgUrl: joi.string().required(),
         createdAt: joi.number().required(),
         by: minUserSchema.required(),
