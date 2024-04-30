@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "/node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import "../assets/styles/main.scss";
+
+@font-face {
+    font-family: Billabong;
+    src: url("../assets/fonts/Billabong.ttf")
+}

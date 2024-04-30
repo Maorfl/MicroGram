@@ -1,0 +1,62 @@
+.profile-div-image {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+
+.profile-add-icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // cursor: pointer;
+
+    &::after {
+        content: "+";
+        color: white;
+        font-weight: bolder;
+        font-size: larger;
+        background: #0095f6;
+        width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.profile-following-button {
+    text-align: center;
+    background: #efefef;
+    color: black;
+    width: 100%;
+    border-radius: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-weight: 600;
+
+    &:active {
+        background-color: #f3f3f3;
+    }
+}
+.profile-follow-button {
+    text-align: center;
+    background: #0095f6;
+    color:white;
+    width: 100%;
+    border-radius: 0.25rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    font-weight: 600;
+
+    &:active {
+        background-color: #0085dd;
+    }
+}

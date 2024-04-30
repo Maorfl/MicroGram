@@ -1,0 +1,23 @@
+.nav {
+    flex-wrap: nowrap;
+    text-align: center;
+}
+
+.nav-underline {
+    --bs-nav-underline-gap: 0;
+    --bs-nav-underline-border-width: 0.1rem;
+}
+
+.nav-item {
+    width: 100%;
+}
+
+.nav-link {
+    color: #9b9b9b;
+    font-size: 1.5rem;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    color: black;
+}

@@ -1,0 +1,158 @@
+//setup
+@import "setup/base";
+@import "setup/fonts";
+@import "setup/functions";
+@import "setup/helpers";
+@import "setup/viariables";
+
+//components
+@import "components/login.scss";
+@import "components/postDetail.scss";
+@import "components/login.scss";
+@import "components/storiesBar.scss";
+@import "components/profileInfo.scss";
+@import "components/profileNav.scss";
+@import"components/settings.scss";
+@import "components/storiesHeader.scss";
+@import "components/notifiedUser.scss";
+@import "components/archiveDetails.scss";
+@import "components/bottomModal.scss";
+@import "components/about.scss";
+
+.debug {
+    outline: dotted 1px rgb(47, 255, 1);
+    background-color: red
+}
+
+h2 {
+    margin: 0;
+    line-height: 0;
+}
+
+* {
+    scrollbar-width: none;
+    overflow: hidden;
+    &:not(.scroll){
+        scrollbar-width: none;
+        overflow: scroll;
+    }
+}
+
+.main {
+    scrollbar-width: none;
+    width: 100%;
+}
+
+.navBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3rem;
+    border-top: 1px solid rgba(219, 219, 219, 0.6);
+    background-color: #fff;
+}
+
+.image-container {
+    width: 100%;
+    margin: auto;
+}
+
+.video-container {
+    width: 80%;
+    margin: auto;
+}
+
+.posts-feed {
+    width: 100%;
+    margin: auto;
+}
+
+
+@media screen and (min-width: 431px) {
+    .posts-feed {
+        width: 70%;
+    }
+    .video-container {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .video-container {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .posts-feed {
+        width: 70%;
+    }
+    .video-container {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 690px) {
+    .posts-feed {
+        width: 60%;
+    }
+    .video-container {
+        width: 50%;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .main{
+        width: 60%;
+        margin: auto;
+        min-height: 100vh;
+        border-width: 2px;
+        border-style: solid;
+        border-image: linear-gradient(#e66465, #9198e5)1 100%;
+    }
+
+    .navBar {
+        width: 59.6%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .posts-feed {
+        width: 90%;
+    }
+
+    .video-container {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .main {
+        width: 50%;
+    }
+
+    .navBar{
+        width: 49.6%;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .main{
+        width: 40%;
+    }
+    .navBar {
+        width: 39.6%;
+    }
+}
+@media screen and (min-width: 1350px) {
+    .main{
+        width: 30%;
+    }
+    .navBar {
+        width: 29.6%;
+    }
+}
