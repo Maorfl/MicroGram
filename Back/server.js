@@ -18,11 +18,10 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.static('public'))
 
+app.use(express.static(path.resolve(__dirname, 'public')))
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, 'public')))
 } else {
   app.use(function (req, res, next) {
-    //Enabling CORS
     const origin = req.get('Origin') || 'http://localhost:3000';
     res.header("Access-Control-Allow-Origin", origin);
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");

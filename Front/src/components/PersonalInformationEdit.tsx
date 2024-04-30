@@ -55,7 +55,11 @@ const PersonalInformationEdit: FunctionComponent<PersonalInformationEditProps> =
                 ...(loggedUser as User),
                 email: values.email as string,
             };
-            await userService.updateUserPassword(loggedUser?._id as string, values.password);
+            const data = {
+                userId: (loggedUser as User)._id,
+                password: values.password,
+            };
+            await userService.updateUserPassword(data);
             dispatch({ type: PostActionType.SetHeaderType, payload: "profile" });
             updatedUser = await feedbackService.promiseToast(
                 userService.updateUser,
