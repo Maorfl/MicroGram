@@ -48,14 +48,9 @@ async function update(post) {
     }
 }
 
-async function deletePost(loggedinUser, postId) {
+async function deletePost(postId) {
     try {
-        const post = await Post.findById(postId);
-        if (loggedinUser._id.$oid === post.by.id || loggedinUser.isAdmin) {
-            await Post.deleteOne(({ _id: postId }));
-            return `Post - ${postId} has been deleted!`;
-        }
-        else throw new Error("Not authorized to delete post");
+        await Post.deleteOne(({ _id: postId }));
     } catch (error) {
         throw error
     }

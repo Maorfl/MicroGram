@@ -59,6 +59,9 @@ const SideModal: FunctionComponent<SideModalProps> = ({ isSideModal }) => {
                     if (location.pathname === "/chats") {
                         dispatch({ type: PostActionType.SetHeaderType, payload: "chats" });
                         navigate("/chats");
+                    } else if (location.pathname === "/profile") {
+                        dispatch({ type: PostActionType.SetHeaderType, payload: "profile" });
+                        navigate("/profile");
                     }
                 }}>
                 <BottomModal isBottomModal={isBottomModal} currentComponent={currentComponent} />

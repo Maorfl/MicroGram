@@ -4,6 +4,7 @@ import Archive from "./Archive";
 import PostOptions from "./PostOptions";
 import Comments from "./Comments";
 import Share from "./Share";
+import MyPostOptions from "./MyPostOptions";
 
 interface BottomModalProps {
     isBottomModal: boolean;
@@ -37,8 +38,10 @@ const BottomModal: FunctionComponent<BottomModalProps> = ({ isBottomModal, curre
                     <Comments />
                 ) : header === "share" || header === "reels-share" || header === "chats-share" ? (
                     <Share />
-                ) : header === "more" || header === "moreProfile" ? (
+                ) : header === "more" ? (
                     <PostOptions />
+                ) : header === "moreProfile" ? (
+                    <MyPostOptions />
                 ) : (
                     <></>
                 )}

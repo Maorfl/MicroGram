@@ -42,7 +42,7 @@ async function updatePost(req, res) {
 
 async function deletePost(req, res) {
     try {
-        const message = await postsService.deletePost(req.loggedinUser, req.params.id);
+        const message = await postsService.deletePost(req.params.id);
 
         res.json(message);
     } catch (err) {

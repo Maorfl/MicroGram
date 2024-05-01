@@ -25,11 +25,11 @@ function handleClick(event: any, handleType: string, data: any, options: ClickOp
             options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: data });
             options.dispatch && options.dispatch({ type: PostActionType.SetHeaderType, payload: "more" });
             break;
-            case "moreProfile":
-                options.dispatch && options.dispatch({ type: ModalActionType.SetBottomModal, payload: true });
-                options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: data });
-                options.dispatch && options.dispatch({ type: PostActionType.SetHeaderType, payload: "moreProfile" });
-            break;
+        case "moreProfile":
+            options.dispatch && options.dispatch({ type: ModalActionType.SetBottomModal, payload: true });
+            options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: data });
+            options.dispatch && options.dispatch({ type: PostActionType.SetHeaderType, payload: "moreProfile" });
+        break;
         case "comments":
             options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: { ...data } });
             options.dispatch && options.dispatch({ type: ModalActionType.SetBottomModal, payload: true });
