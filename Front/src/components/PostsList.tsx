@@ -1,9 +1,10 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Post from "../interfaces/Post";
 import PostDetail from "./PostDetail";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authService } from "../services/authService";
 import BottomModal from "./BottomModal";
+import { ModalActionType } from "../redux/ModalState";
 
 interface PostsListProps {
     posts: Post[];
@@ -14,6 +15,7 @@ const PostsList: FunctionComponent<PostsListProps> = ({ posts }) => {
     const selectedPost: Post = useSelector((state: any) => state.postState.post as Post);
     const isBottomModal = useSelector((state: any) => state.modalState.bottomModal);
     const [postsList, setPostsList] = useState<Post[]>([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         const postIndex = posts.findIndex((post) => post._id === selectedPost._id);
@@ -35,7 +37,14 @@ const PostsList: FunctionComponent<PostsListProps> = ({ posts }) => {
                         })}
                 </div>
             )}
-            <BottomModal isBottomModal={isBottomModal} currentComponent="home" />
+            <div
+                className={`modal-bg will-change-transform ${isBottomModal ? "active" : ""} `}
+                onClick={(e) => {
+                    e.preventDefault();
+                    dispatch({ type: ModalActionType.SetBottomModal, payload: false });
+                }}>
+                <BottomModal isBottomModal={isBottomModal} currentComponent="home" />
+            </div>
         </>
     );
 };
