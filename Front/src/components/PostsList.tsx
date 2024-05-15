@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authService } from "../services/authService";
 import BottomModal from "./BottomModal";
 import { ModalActionType } from "../redux/ModalState";
+import { useLocation } from "react-router-dom";
 
 interface PostsListProps {
     posts: Post[];
@@ -14,8 +15,10 @@ const PostsList: FunctionComponent<PostsListProps> = ({ posts }) => {
     const loggedUser = authService.getLoggedInUser();
     const selectedPost: Post = useSelector((state: any) => state.postState.post as Post);
     const isBottomModal = useSelector((state: any) => state.modalState.bottomModal);
+    const post = useSelector((state: any) => state.postState.post as Post);
     const [postsList, setPostsList] = useState<Post[]>([]);
     const dispatch = useDispatch();
+    const location = useLocation();
 
     useEffect(() => {
         const postIndex = posts.findIndex((post) => post._id === selectedPost._id);
@@ -23,7 +26,7 @@ const PostsList: FunctionComponent<PostsListProps> = ({ posts }) => {
         updatedPosts.splice(postIndex, 1);
         updatedPosts.unshift(selectedPost);
         setPostsList(updatedPosts);
-    }, [selectedPost]);
+    }, [selectedPost, post]);
     return (
         <>
             {!isBottomModal && (
@@ -43,7 +46,11 @@ const PostsList: FunctionComponent<PostsListProps> = ({ posts }) => {
                     e.preventDefault();
                     dispatch({ type: ModalActionType.SetBottomModal, payload: false });
                 }}>
-                <BottomModal isBottomModal={isBottomModal} currentComponent="home" />
+                {location.pathname === "/search" ? (
+                    <BottomModal isBottomModal={isBottomModal} currentComponent="explore" />
+                ) : (
+                    <BottomModal isBottomModal={isBottomModal} currentComponent="home" />
+                )}
             </div>
         </>
     );

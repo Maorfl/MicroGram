@@ -51,8 +51,7 @@ const Archive: FunctionComponent<ArchiveProps> = () => {
                         };
                         handleClickService.handleClick(e, ClickTypes.archiveBack, false, options);
                     }}
-                    className="flex-initial ms-2 text-2xl"
-                >
+                    className="flex-initial ms-2 text-2xl">
                     <FontAwesomeIcon icon={faArrowLeft} />
                 </div>
                 <div className="flex-1 font-bold text-overflow text-2xl">Stories Archive</div>

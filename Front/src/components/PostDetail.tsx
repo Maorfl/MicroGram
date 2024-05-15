@@ -169,7 +169,9 @@ const PostDetail: FunctionComponent<PostDetailProps> = ({ post }) => {
                     )
                 )}
 
-                <small className="text-[#737373]">{utilService.getTimeSinceCreation(post.createdAt)}</small>
+                <p className="text-[#737373]">
+                    <small>{` ${utilService.getTimeSinceCreation(post.createdAt)}`}</small>
+                </p>
             </div>
         </div>
     );

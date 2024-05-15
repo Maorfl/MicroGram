@@ -1,10 +1,11 @@
-import { FunctionComponent, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { FunctionComponent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Archive from "./Archive";
 import PostOptions from "./PostOptions";
 import Comments from "./Comments";
 import Share from "./Share";
 import MyPostOptions from "./MyPostOptions";
+import { PostActionType } from "../redux/PostState";
 
 interface BottomModalProps {
     isBottomModal: boolean;
@@ -13,18 +14,24 @@ interface BottomModalProps {
 
 const BottomModal: FunctionComponent<BottomModalProps> = ({ isBottomModal, currentComponent }) => {
     const header = useSelector((state: any) => state.postState.component);
+    const [currentHeader, setCurrentHeader] = useState<string>("");
+    const dispatch = useDispatch();
 
-    useEffect(() => {}, [header]);
+    useEffect(() => {
+        setCurrentHeader(header);
+        if (currentComponent === "explore") dispatch({ type: PostActionType.SetHeaderType, payload: "explore" });
+    }, [isBottomModal]);
 
     return (
         <>
             <div
                 className={`bottomModal ${isBottomModal ? "active" : ""} ${
-                    (currentComponent === "home" && header === "comments") ||
-                    (currentComponent === "reels" && header === "reels-comments")
+                    ((currentComponent === "home" || currentComponent === "explore") && currentHeader === "comments") ||
+                    (currentComponent === "reels" && currentHeader === "reels-comments")
                         ? "h-92 bottom-0 rounded-xl"
-                        : (currentComponent === "home" && header !== "comments") ||
-                          (currentComponent === "reels" && header === "reels-share")
+                        : ((currentComponent === "home" || currentComponent === "explore") &&
+                              currentHeader !== "comments") ||
+                          (currentComponent === "reels" && currentHeader === "reels-share")
                         ? "h-2/3 bottom-0 rounded-xl"
                         : "h-full"
                 }`}
@@ -32,15 +39,15 @@ const BottomModal: FunctionComponent<BottomModalProps> = ({ isBottomModal, curre
                     e.stopPropagation();
                     e.preventDefault();
                 }}>
-                {header === "archive" ? (
+                {currentHeader === "archive" ? (
                     <Archive />
-                ) : header === "comments" || header === "reels-comments" ? (
+                ) : currentHeader === "comments" || currentHeader === "reels-comments" ? (
                     <Comments />
-                ) : header === "share" || header === "reels-share" || header === "chats-share" ? (
+                ) : currentHeader === "share" || currentHeader === "reels-share" || currentHeader === "chats-share" ? (
                     <Share />
-                ) : header === "more" ? (
+                ) : currentHeader === "more" ? (
                     <PostOptions />
-                ) : header === "moreProfile" ? (
+                ) : currentHeader === "moreProfile" ? (
                     <MyPostOptions />
                 ) : (
                     <></>

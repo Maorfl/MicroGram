@@ -50,10 +50,38 @@ async function deletePost(req, res) {
     }
 }
 
+async function addComment(req, res) {
+    try {
+        const post = await postsService.getById(req.params.id);
+        post.comments.push(req.body);
+        const updatedPost = await postsService.comment(post);
+
+        res.json(updatedPost);
+    } catch (err) {
+        res.status(500).send(err.message)
+    }
+}
+
+async function deleteComment(req, res) {
+    try {
+        console.log(req.params);
+        console.log(req.query);
+        const post = await postsService.getById(req.params.id);
+        post.comments = post.comments.filter((comment) => comment.commentId !== req.query.commentId);
+        const updatedPost = await postsService.comment(post);
+
+        res.json(updatedPost);
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
+
 module.exports = {
     getPosts,
     getPostById,
     addPost,
     updatePost,
-    deletePost
+    deletePost,
+    addComment,
+    deleteComment
 }

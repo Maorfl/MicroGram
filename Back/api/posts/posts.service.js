@@ -68,10 +68,20 @@ async function getRandomPosts(numRandomPosts = 10) {
     }
 }
 
+async function comment(post) {
+    try {
+        return await Post.findOneAndUpdate({ _id: post._id }, post, { new: true });
+    } catch (error) {
+        throw error
+    }
+
+}
+
 module.exports = {
     query,
     getById,
     add,
     update,
-    deletePost
+    deletePost,
+    comment
 }

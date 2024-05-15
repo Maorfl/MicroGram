@@ -10,12 +10,14 @@ import SideModal from "./SideModal";
 import { useDispatch, useSelector } from "react-redux";
 import { UserActionType } from "../redux/UserState";
 import ClipLoader from "react-spinners/ClipLoader";
+import Post from "../interfaces/Post";
 
 interface HomeProps {}
 
 const Home: FunctionComponent<HomeProps> = ({}) => {
     const loggedUser = authService.getLoggedInUser();
     const isSideModal = useSelector((state: any) => state.modalState.sideModal);
+    const post = useSelector((state: any) => state.postState.post as Post);
     const [followingPosts, setFollowingPosts] = useState([]);
     const [followingStories, setFollowingStories] = useState([]);
     const [isPending, setIsPending] = useState<boolean>(false);
@@ -47,7 +49,7 @@ const Home: FunctionComponent<HomeProps> = ({}) => {
                 setIsPending(false);
             })();
         }
-    }, [isSideModal]);
+    }, [isSideModal, post]);
 
     return (
         <>
