@@ -203,6 +203,7 @@ const Create: FunctionComponent<CreateProps> = () => {
                             type="file"
                             multiple={false}
                             capture="user"
+                            accept="video/*"
                             onChange={(e) => handleFileChange(e, "reel")}
                         />
                     </label>
