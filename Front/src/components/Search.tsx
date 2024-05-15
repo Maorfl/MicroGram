@@ -42,7 +42,7 @@ const Search: FunctionComponent<SearchProps> = () => {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             type="search"
-                            placeholder="Search"
+                            placeholder="Search for users..."
                         />
                         <button className={`${search === "" ? "hidden" : ""}`} onClick={() => setSearch("")}>
                             <FontAwesomeIcon icon={faXmark} />
