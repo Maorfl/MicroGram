@@ -117,7 +117,15 @@ const Comments: FunctionComponent<CommentsProps> = () => {
                                                 comment,
                                                 user: loggedUser,
                                             };
-                                            await handleClickService.handleClick(e, ClickTypes.likeComment, data);
+                                            const options = {
+                                                dispatch,
+                                            };
+                                            await handleClickService.handleClick(
+                                                e,
+                                                ClickTypes.likeComment,
+                                                data,
+                                                options
+                                            );
                                             setIsChanged(!isChanged);
                                         }}>
                                         {comment.likedBy.filter((userId: string) => userId == loggedUser?._id)

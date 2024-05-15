@@ -51,7 +51,8 @@ function handleClick(event: any, handleType: string, data: any, options: ClickOp
             (async () => {
                 if (data.comment.likedBy.includes(data.user._id)) data.comment.likedBy.splice(data.comment.likedBy.indexOf(data.user._id), 1);
                 else data.comment.likedBy.push(data.user._id);
-                await postService.savePost(data.post);
+                const post = await postService.savePost(data.post);
+                options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: {...post} });
             })();
             break;
         case "save":
