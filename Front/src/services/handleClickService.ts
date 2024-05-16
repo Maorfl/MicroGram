@@ -49,10 +49,16 @@ function handleClick(event: any, handleType: string, data: any, options: ClickOp
             break;
         case "likeComment":
             (async () => {
-                if (data.comment.likedBy.includes(data.user._id)) data.comment.likedBy.splice(data.comment.likedBy.indexOf(data.user._id), 1);
-                else data.comment.likedBy.push(data.user._id);
-                const post = await postService.savePost(data.post);
-                options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: {...post} });
+                const updatedComment = {
+                    ...data.comment,
+                    likedBy: data.comment.likedBy.includes(data.user._id) ? data.comment.likedBy.filter((userId: string) => userId !== data.user._id) : [...data.comment.likedBy, data.user._id],
+                } 
+                const updatedPost = {
+                    ...data.post,
+                    comments: data.post.comments.map((c:any) => c.commentId === updatedComment.commentId ? updatedComment : c),
+                };
+                await postService.savePost(updatedPost);
+                options.dispatch && options.dispatch({ type: PostActionType.SetPost, payload: {...updatedPost} });
             })();
             break;
         case "save":

@@ -8,13 +8,14 @@ import { useDispatch } from "react-redux";
 import { PostActionType } from "../redux/PostState";
 import { UserActionType } from "../redux/UserState";
 import { useNavigate } from "react-router-dom";
-import profilePic from "../assets/images/profile-picture.jpeg";
 import { feedbackService } from "../services/feedbackService";
+import { uploadImg } from "../services/uploadService";
 
 interface EditProfileProps {}
 
 const EditProfile: FunctionComponent<EditProfileProps> = () => {
     const loggedUser = authService.getLoggedInUser();
+    const [file, setFile] = useState<File | null>(null);
     const [picture, setPicture] = useState<string>("");
     const [selectedGender, setSelectedGender] = useState<string>("");
     const dispatch = useDispatch();
@@ -35,13 +36,16 @@ const EditProfile: FunctionComponent<EditProfileProps> = () => {
             gender: yup.string().required(),
         }),
         onSubmit: async (values) => {
+            let url = null;
+            if (file) url = await uploadImg(file as File);
+
             const updatedUser = {
                 ...(loggedUser as User),
                 fullname: values.fullname as string,
                 username: values.username as string,
                 description: values.description as string,
                 gender: values.gender as string,
-                imgUrl: picture || profilePic,
+                imgUrl: url ? url.url : picture,
             };
             dispatch({ type: PostActionType.SetHeaderType, payload: "profile" });
             dispatch({ type: UserActionType.SetUser, payload: updatedUser });
@@ -50,29 +54,46 @@ const EditProfile: FunctionComponent<EditProfileProps> = () => {
         },
     });
 
+    const handleImageUpload = async (e: any) => {
+        const selectedPicture = e.target.files?.[0];
+        if (selectedPicture) {
+            setFile(selectedPicture);
+            feedbackService.successMsg("Image uploaded successfully");
+        }
+    };
+
     useEffect(() => {
-        setPicture(loggedUser?.imgUrl as string);
         setSelectedGender(loggedUser?.gender as string);
+        setPicture(loggedUser?.imgUrl as string);
     }, []);
 
     return (
         <>
             <div className="w-full">
-                <div className="flex justify-center mt-4">
-                    <div
-                        className="flex flex-col"
-                        onClick={(e) => {
-                            e.preventDefault();
-                        }}>
+                <div className="flex justify-center mt-1">
+                    <label htmlFor="image-upload" className="cursor-pointer m-0 text-[#0095f6] font-semibold">
                         <div>
-                            <img src={picture || profilePic} alt="User image" className="rounded-image-lg" />
+                            {file ? (
+                                <img src={URL.createObjectURL(file)} alt="User image" className="rounded-image-lg" />
+                            ) : (
+                                <img src={picture} alt="User image" className="rounded-image-lg" />
+                            )}
                         </div>
-                        <div className="m-0 text-[#0095f6] font-semibold">Edit picture</div>
-                    </div>
+                        Edit picture
+                        <input
+                            id="image-upload"
+                            style={{ opacity: 0, position: "absolute", display: "none" }}
+                            type="file"
+                            multiple={false}
+                            capture="environment"
+                            accept="image/*"
+                            onChange={(e) => handleImageUpload(e)}
+                        />
+                    </label>
                 </div>
                 <div className="flex justify-center">
                     <form className="w-96 px-2 flex flex-col" onSubmit={formik.handleSubmit}>
-                        <div className="form-floating mb-3">
+                        <div className="form-floating mb-2">
                             <input
                                 type="text"
                                 className="form-control border-t-0 border-s-0 border-e-0 focus:ring-0"
@@ -86,7 +107,7 @@ const EditProfile: FunctionComponent<EditProfileProps> = () => {
                                 Name
                             </label>
                         </div>
-                        <div className="form-floating mb-3">
+                        <div className="form-floating mb-2">
                             <input
                                 type="text"
                                 className="form-control border-t-0 border-s-0 border-e-0 focus:ring-0"
@@ -100,7 +121,7 @@ const EditProfile: FunctionComponent<EditProfileProps> = () => {
                                 Username
                             </label>
                         </div>
-                        <div className="form-floating mb-3">
+                        <div className="form-floating mb-2">
                             <input
                                 type="text"
                                 className="form-control border-t-0 border-s-0 border-e-0 focus:ring-0"
