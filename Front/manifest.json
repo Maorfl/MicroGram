@@ -1,0 +1,16 @@
+{
+    "name":"MicroGram",
+    "short_name": "MicroGram",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "description": "Microgram is a social network for developers.",
+    "icons": [
+        {
+            "src": "./microgram2.jpg",
+            "sizes": "144x144",
+            "type": "image/jpg"
+        }
+    ]
+}
