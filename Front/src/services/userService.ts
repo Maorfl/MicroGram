@@ -80,7 +80,7 @@ async function getUserPassword(userId: string): Promise<string> {
 
 async function updateUserPassword(data:any):Promise<void>{
     try {
-        return await axiosService.put(`${ENDPOINT}/${data.userId}/password`,data.password);
+        return await axiosService.put(`${ENDPOINT}/${data.userId}/password`,data);
     } catch (error) {
         throw new Error("Could not update user's password");
     }

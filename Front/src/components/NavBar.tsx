@@ -24,7 +24,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setHeader }) => {
     const location = useLocation();
 
     useEffect(() => {
-        if (location.pathname.substring(1) !== "login" && location.pathname.substring(1) !== "signup") {
+        if (!location.pathname.substring(1).includes("login") && location.pathname.substring(1) !== "signup") {
             if (location.pathname.substring(1).includes("chats")) setHeader("chats");
             else if (location.pathname.substring(1).includes("profile")) {
                 if (location.pathname.substring(1) === "profile") setHeader("profile");
@@ -35,7 +35,8 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setHeader }) => {
                         setHeader("profile");
                     })();
                 }
-            } else setHeader(location.pathname.substring(1));
+            } else if (location.pathname.substring(1) === "forgot") return;
+            else setHeader(location.pathname.substring(1));
         }
     }, []);
 
@@ -69,15 +70,6 @@ const NavBar: FunctionComponent<NavBarProps> = ({ setHeader }) => {
                     </span>
                 </NavLink>
 
-                {/* <label htmlFor="file-upload">
-                    <FontAwesomeIcon icon={faSquarePlus} className="text-2xl " />
-                </label>
-                <input
-                    id="file-upload"
-                    style={{ opacity: 0, position: "absolute", display: "none" }}
-                    type="file"
-                    capture="user"
-                /> */}
                 <NavLink to={"/create"}>
                     <span
                         onClick={() => {

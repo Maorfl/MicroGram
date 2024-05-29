@@ -8,8 +8,8 @@ const router = express.Router();
 router.get('/', getUsers);
 router.get('/:id', getUser);
 router.get('/forgot/:email', getUserByEmail)
-router.get('/:id/password', requireAuth, getUserPassword);
-router.put('/:id/password',requireAuth, updateUserPassword);
+router.get('/:id/password', getUserPassword);
+router.put('/:id/password', updateUserPassword);
 router.put('/:id', requireAuth, updateUser);
 router.delete('/:id', requireAuth, deleteUser);
 

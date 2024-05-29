@@ -57,9 +57,8 @@ async function getUserPassword(req, res) {
 
 async function updateUserPassword(req, res) {
     try {
-        const loggedinUserId = req.loggedinUser._id;
-        await userService.updateUserPassword(req.body, loggedinUserId);
-        res.status(200).send('Password updated successfully');
+        const updatedUser = await userService.updateUserPassword(req.body);
+        res.status(200).send(updatedUser);
     } catch (err) {
         res.status(400).send(err.message)
     }
@@ -67,8 +66,8 @@ async function updateUserPassword(req, res) {
 
 async function deleteUser(req, res) {
     try {
-        await userService.deleteUser(req.params.id)
-        res.status(200).send('User deleted successfully');
+        const message = await userService.deleteUser(req.params.id)
+        res.status(200).send(message);
     } catch (err) {
         res.status(400).send(err.message)
     }

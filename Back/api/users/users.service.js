@@ -79,10 +79,11 @@ async function add(userData) {
     }
 }
 
-async function updateUserPassword(newPassword,userId) {
+async function updateUserPassword(userData) {
     try {
-        const hashedPassword = jwt.sign(newPassword, 'dev');
-        await User.findOneAndUpdate({ _id: userId }, { password: hashedPassword });
+        const hashedPassword = jwt.sign(userData.password, 'dev');
+        const updatedUser = await User.findOneAndUpdate({ _id: userData.userId }, { password: hashedPassword });
+        return updatedUser
     } catch (error) {
         throw new Error('Could not update password');
     }
@@ -100,6 +101,7 @@ async function getUserPassword(userId) {
 async function deleteUser(userId) {
     try {
         await User.findOneAndDelete({ _id: userId });
+        return "User deleted successfully";
     } catch (error) {
         throw new Error('Could not delete user');
     }
