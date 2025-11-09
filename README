@@ -22,18 +22,6 @@ There are 3 user saved to test functionality.
 
 ## .env - Must be added independently in both folders
 
-### Front
-
-    REACT_APP_API="http://localhost:5173/api"
-
-### Back
-
-    NODE_ENV = development
-    PORT = 3000
-    DB = "mongodb+srv://maorfl:M0301f1644@maor-cluster.yi54khe.mongodb.net/MicroGram" # Atlas
-    # Local: DB = "mongodb://127.0.0.1:27017/business"
-    jwtKey = "dev"
-
 ## node_modules
 
 ### Back
